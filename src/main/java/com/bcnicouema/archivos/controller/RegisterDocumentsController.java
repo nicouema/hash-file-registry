@@ -6,7 +6,6 @@ import com.bcnicouema.archivos.dto.response.Registry512ListResponse;
 import com.bcnicouema.archivos.dto.response.RegistrySha256Response;
 import com.bcnicouema.archivos.dto.response.RegistrySha512Response;
 import com.bcnicouema.archivos.exception.BadRequestException;
-import com.bcnicouema.archivos.exception.NotFoundException;
 import com.bcnicouema.archivos.model.Registry;
 import com.bcnicouema.archivos.service.RegistryService;
 import lombok.RequiredArgsConstructor;
