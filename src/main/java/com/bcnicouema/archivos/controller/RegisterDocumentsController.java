@@ -30,7 +30,7 @@ public class RegisterDocumentsController {
     public ResponseEntity<?> registerFiles(@RequestParam("hashType") String hashType,
                                            @RequestParam("files") MultipartFile[] files){
 
-        if (!(Arrays.stream(files).findFirst().get().getSize() > 0)) {
+        if (Arrays.stream(files).findFirst().get().isEmpty()) {
             throw new BadRequestException("No se subieron documentos");
         }
 
