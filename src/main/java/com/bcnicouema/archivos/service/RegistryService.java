@@ -11,3 +11,10 @@ public interface RegistryService {
     List<Registry> registerDocumentsSHA256(MultipartFile[] list);
 
     List<Registry> registerDocumentsSHA512(MultipartFile[] list);
+
+    List<Registry> getAllRegistries();
+
+    Registry getRegistryByHash256(String hash);
+
+    Registry getRegistryByHash512(String hash);
+}

@@ -63,3 +63,30 @@ public class RegisterDocumentsController {
             throw new BadRequestException("El parámetro ‘hash’ solo puede ser ‘SHA-256’ o ‘SHA-512’");
         }
     }
+
+    @GetMapping("/{hash}")
+    public ResponseEntity<?> getRegistryByHash(@RequestParam String hashType,
+                                               @PathVariable String hash) {
+        if (hashType.equals("SHA-256")) {
+
+            Registry registry = registryService.getRegistryByHash256(hash);
+            RegistrySha256Response response = mapper.registryToRegistry256Response(registry);
+            return ResponseEntity.ok(response);
+
+        }else if (hashType.equals("SHA-512")){
+
+            Registry registry = registryService.getRegistryByHash512(hash);
+            RegistrySha512Response response = mapper.registryToRegistry512Response(registry);
+            return ResponseEntity.ok(response);
+        }else {
+            throw new BadRequestException("El parámetro ‘hash’ solo puede ser ‘SHA-256’ o ‘SHA-512’");
+        }
+
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Registry>> getAllRegistries() {
+        List<Registry> content = registryService.getAllRegistries();
+        return ResponseEntity.ok(content);
+    }
+}

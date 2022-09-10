@@ -128,3 +128,43 @@ public class RegistryServiceImpl implements RegistryService {
         registryRepository.save(registryToUpdate);
         return registryToUpdate;
     }
+
+    private Optional<Registry> getRegistryIfExist(String fileName){
+        return registryRepository.findById(fileName);
+    }
+
+
+    @Override
+    @Transactional
+    public List<Registry> getAllRegistries() {
+        return registryRepository.findAll();
+    }
+
+    @Override
+    public Registry getRegistryByHash256(String hash) {
+        List<Registry> list = getAllRegistries();
+        for (Registry registry:list) {
+            if (registry.getHashSha256() != null){
+                if (registry.getHashSha256().equals(hash)){
+                    return registry;
+                }
+            }
+        }
+        throw new NotFoundException("No hay ningún documento con ese nombre");
+    }
+
+    @Override
+    public Registry getRegistryByHash512(String hash) {
+        List<Registry> list = getAllRegistries();
+        for (Registry registry:list) {
+            if (registry.getHashSha512() != null){
+                if (registry.getHashSha512().equals(hash)){
+                    return registry;
+                }
+            }
+        }
+        throw new NotFoundException("No hay ningún documento con ese nombre");
+    }
+
+
+}
